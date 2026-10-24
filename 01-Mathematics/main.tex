@@ -1,0 +1,117 @@
+% Mathematics & Research Notes - LaTeX template
+% 编译方式：XeLaTeX（Overleaf 中 Menu -> Compiler -> XeLaTeX）
+\documentclass[12pt,a4paper]{ctexart}
+
+% 页面、数学环境和链接
+\usepackage[margin=2.5cm]{geometry}
+\usepackage{amsmath,amssymb,amsthm,mathtools}
+\usepackage{graphicx}
+\usepackage{booktabs}
+\usepackage{hyperref}
+\hypersetup{colorlinks=true,linkcolor=blue,citecolor=blue,urlcolor=blue}
+
+% 定理环境
+\theoremstyle{plain}
+\newtheorem{theorem}{定理}[section]
+\newtheorem{lemma}[theorem]{引理}
+\newtheorem{proposition}[theorem]{命题}
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{定义}
+\newtheorem{example}[theorem]{例}
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{注}
+\renewcommand{\proofname}{证明}
+
+% 常用记号
+\newcommand{\R}{\mathbb{R}}
+\newcommand{\dd}{\mathrm{d}}
+\newcommand{\norm}[1]{\left\lVert #1\right\rVert}
+
+\title{数学与科研笔记\\\large Mathematics \& Research Notes}
+\author{作者姓名（请修改）}
+\date{\today}
+
+\begin{document}
+\maketitle
+\tableofcontents
+\newpage
+
+\section{研究背景与问题}
+这里记录问题背景、文献来源、研究目标和基本假设。
+
+\section{模型与基本定义}
+考虑自治动力系统
+\begin{equation}\label{eq:system}
+    \dot{x}=f(x),\qquad x\in\R^n.
+\end{equation}
+
+\begin{definition}[平衡点]
+若 $f(x^*)=0$，则称 $x^*$ 为系统 \eqref{eq:system} 的平衡点。
+\end{definition}
+
+\section{主要结果}
+\begin{theorem}[线性化稳定性判据]\label{thm:stability}
+设 $f$ 在平衡点 $x^*$ 的邻域内连续可微。若雅可比矩阵
+$Df(x^*)$ 的全部特征值均具有严格负实部，则 $x^*$ 局部渐近稳定。
+\end{theorem}
+
+\begin{proof}
+令 $y=x-x^*$，系统可写为
+\begin{equation}
+    \dot y=Ay+r(y),\qquad A=Df(x^*),\quad
+    \lim_{\norm{y}\to0}\frac{\norm{r(y)}}{\norm{y}}=0.
+\end{equation}
+由线性化稳定性定理可得结论。实际写作时请在此补充完整证明或引用。
+\end{proof}
+
+\begin{remark}
+如果存在特征值的实部等于零，上述判据不能直接决定非线性系统的稳定性。
+\end{remark}
+
+\section{示例：二维种群动力学}
+一个简单的相互竞争模型是
+\begin{equation}
+\begin{cases}
+\dot S=r_s S\left(1-\dfrac{S+\alpha R}{K}\right),\\[6pt]
+\dot R=r_r R\left(1-\dfrac{R+\beta S}{K}\right).
+\end{cases}
+\end{equation}
+这里 $S,R$ 表示两类种群数量，$r_s,r_r$ 为增长率，$K$ 为环境容纳量。
+
+\section{数值模拟与图表}
+\begin{table}[htbp]
+\centering
+\caption{参数表示例（数值仅供演示）}
+\begin{tabular}{lll}
+\toprule
+参数 & 含义 & 示例值\\
+\midrule
+$r_s$ & 第一种群增长率 & $0.1$\\
+$r_r$ & 第二种群增长率 & $0.08$\\
+$K$ & 环境容纳量 & $1$\\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% 如需插图，将图片放在 figures 文件夹下，取消下面各行的注释：
+% \begin{figure}[htbp]
+% \centering
+% \includegraphics[width=0.75\textwidth]{figures/trajectory.png}
+% \caption{轨迹示意图}
+% \label{fig:trajectory}
+% \end{figure}
+
+\section{结论与待解决问题}
+\begin{itemize}
+    \item 本节总结已经得到的数学结论。
+    \item 记录尚需验证的假设及数值问题。
+    \item 记录下一步研究方向。
+\end{itemize}
+
+\begin{thebibliography}{9}
+\bibitem{perko}
+L. Perko, \textit{Differential Equations and Dynamical Systems}, 3rd ed., Springer, 2001.
+\end{thebibliography}
+
+\end{document}
+
